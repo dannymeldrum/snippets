@@ -6,3 +6,6 @@ config.js
 
 # links
 notes.txt
+
+boilerplate/node_modules
+boilerplate/build
