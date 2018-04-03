@@ -1,15 +1,22 @@
+const autoprefixer = require('autoprefixer');
+
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     sass: {
       options: {
-        sourceMap: true
+        sourceMap: true,
+        outputStyle: "nested"
       },
       dev: {
-        files: {
-          './build/css/screen.css': './src/sass/screen.scss'
-        }
+        files: [{
+          expand: true,
+          cwd: 'src/sass/',
+          src: ['*.scss'],
+          dest: 'build/css/',
+          ext: '.css'
+        }]
       }
     },
 
@@ -17,6 +24,9 @@ module.exports = function(grunt) {
       html: {
         files: ["./src/html/**/*"],
         tasks: ['render'],
+        options: {
+          livereload: true
+        }
       },
       css: {
         files: ['./src/sass/**/*'],
@@ -24,7 +34,15 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         }
-      }
+      },
+      assets: {
+        files: [
+          "./src/assets/**/*"
+        ],
+        tasks: [
+          "copy:dev"
+        ]
+      },
     },
 
     render: {
@@ -50,8 +68,45 @@ module.exports = function(grunt) {
             "expand": true,
             "cwd": "src/html/pages/",
             "src": "**/*.ejs",
-            "dest": "build/html",
+            "dest": "build/",
             "ext": ".html"
+          }
+        ]
+      }
+    },
+
+    express: {
+      dev: {
+        options: {
+          script: "./server.js"
+        }
+      }
+    },
+
+    postcss: {
+      "dev": {
+        "options": {
+          "processors": [
+            autoprefixer({
+                "browsers": ['ie 11', 'last 2 versions']
+            })
+          ]
+        },
+        "expand": true,
+        "cwd": "./build/css",
+        "src": "**/*.css",
+        "dest": "./build/css/"
+      },
+    },
+
+    copy: {
+      "dev": {
+        "files": [
+          {
+            "expand": true,
+            "cwd": "./src/assets/",
+            "src": "**/*",
+            "dest": "./build/assets/"
           }
         ]
       }
@@ -63,12 +118,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ejs-render');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   //Define the tasks to run
-  grunt.registerTask('default', ['sass', 'render']);
+  grunt.registerTask('default', ['sass', 'copy']);
 
   grunt.registerTask('dev', '[EP] Active development phase', [
+    'copy',
     'sass',
+    'render',
+    'express',
     'watch',
   ]);
 };
