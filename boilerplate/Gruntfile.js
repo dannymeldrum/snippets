@@ -1,22 +1,68 @@
 const autoprefixer = require('autoprefixer');
+const csswring = require('csswring');
 
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    uglify: {
+      build: {
+        src: './build/assets/js/script.js',
+        dest: './build/assets/js/script.min.js'
+      }
+    },
+
+    concat: {
+      dist: {
+        src: [
+          './src/js/libs/*.js',
+          './src/js/script.js'
+        ],
+        dest: './build/assets/js/script.js'
+      }
+    },
+
     sass: {
-      options: {
-        sourceMap: true,
-        outputStyle: "nested"
-      },
       dev: {
+        options: {
+          sourceMap: true
+        },
         files: [{
           expand: true,
           cwd: 'src/sass/',
           src: ['*.scss'],
-          dest: 'build/css/',
+          dest: './build/assets/css/',
           ext: '.css'
         }]
+      },
+      dist: {
+        options: {
+          sourceMap: false,
+          outputStyle: "compressed"
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/sass/',
+          src: ['*.scss'],
+          dest: './build/assets/css/',
+          ext: '.css'
+        }]
+      }
+    },
+
+    postcss: {
+      dev: {
+        options: {
+          processors: [
+            autoprefixer({
+              browsers: ['ie 8', 'ie 9', 'last 2 versions']
+            })
+          ]
+        },
+        expand: true,
+        cwd: "./build/assets/css/",
+        src: "**/*.css",
+        dest: "./build/assets/css/"
       }
     },
 
@@ -31,6 +77,13 @@ module.exports = function(grunt) {
       css: {
         files: ['./src/sass/**/*'],
         tasks: ['sass'],
+        options: {
+          livereload: true
+        }
+      },
+      js: {
+        files: ['./src/js/**/*'],
+        tasks: ['uglify'],
         options: {
           livereload: true
         }
@@ -83,22 +136,6 @@ module.exports = function(grunt) {
       }
     },
 
-    postcss: {
-      "dev": {
-        "options": {
-          "processors": [
-            autoprefixer({
-                "browsers": ['ie 11', 'last 2 versions']
-            })
-          ]
-        },
-        "expand": true,
-        "cwd": "./build/css",
-        "src": "**/*.css",
-        "dest": "./build/css/"
-      },
-    },
-
     copy: {
       "dev": {
         "files": [
@@ -116,18 +153,22 @@ module.exports = function(grunt) {
 
   //Load the plugins
   grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-ejs-render');
-  grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   //Define the tasks to run
-  grunt.registerTask('default', ['sass', 'copy']);
+  grunt.registerTask('default', ['sass:dist', 'postcss', 'render', 'copy', 'concat', 'uglify']);
 
   grunt.registerTask('dev', '[EP] Active development phase', [
-    'copy',
-    'sass',
+    'sass:dev',
+    'postcss',
     'render',
+    'copy',
     'express',
     'watch',
   ]);
