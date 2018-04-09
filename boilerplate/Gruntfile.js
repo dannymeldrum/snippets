@@ -1,176 +1,36 @@
-const autoprefixer = require('autoprefixer');
-const csswring = require('csswring');
-
 module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
 
-    uglify: {
-      build: {
-        src: './build/assets/js/script.js',
-        dest: './build/assets/js/script.min.js'
-      }
-    },
+  function loadConfig(path) {
+    var glob = require('glob');
+    var object = {};
+    var key;
 
-    concat: {
-      dist: {
-        src: [
-          './src/js/vendor/*.js',
-          './src/js/script.js'
-        ],
-        dest: './build/assets/js/script.js'
-      }
-    },
+    glob.sync('*', {cwd: path}).forEach(function(option) {
+      key = option.replace(/\.js$/,'');
+      object[key] = require(path + option);
+    });
 
-    sass: {
-      dev: {
-        options: {
-          sourceMap: true
-        },
-        files: [{
-          expand: true,
-          cwd: 'src/sass/',
-          src: ['*.scss'],
-          dest: './build/assets/css/',
-          ext: '.css'
-        }]
-      },
-      dist: {
-        options: {
-          sourceMap: false,
-          outputStyle: "compressed"
-        },
-        files: [{
-          expand: true,
-          cwd: 'src/sass/',
-          src: ['*.scss'],
-          dest: './build/assets/css/',
-          ext: '.css'
-        }]
-      }
-    },
+    return object;
+  }
 
-    postcss: {
-      dev: {
-        options: {
-          processors: [
-            autoprefixer({
-              browsers: ['ie 8', 'ie 9', 'last 2 versions']
-            })
-          ]
-        },
-        expand: true,
-        cwd: "./build/assets/css/",
-        src: "**/*.css",
-        dest: "./build/assets/css/"
-      }
-    },
+  // Initial config
+  var config = {
+    pkg: grunt.file.readJSON('package.json')
+  }
 
-    watch: {
-      html: {
-        files: ["./src/html/**/*"],
-        tasks: ['render'],
-        options: {
-          livereload: true
-        }
-      },
-      css: {
-        files: ['./src/sass/**/*'],
-        tasks: ['sass'],
-        options: {
-          livereload: true
-        }
-      },
-      js: {
-        files: ['./src/js/**/*'],
-        tasks: ['uglify'],
-        options: {
-          livereload: true
-        }
-      },
-      assets: {
-        files: [
-          "./src/assets/**/*"
-        ],
-        tasks: [
-          "copy:dev"
-        ]
-      },
-    },
+  // Load tasks from the tasks folder
+  grunt.loadTasks('tasks');
 
-    render: {
-      options: {
-        partialPaths: ["src/html/partials/"],
-        helpers: {
-          target: function () {
-            return grunt.task.current.target;
-          },
-          "render": function (filename, supplied_variables) {
-            const variables = Object.assign(
-              {},
-              { model: {} },
-              supplied_variables
-            );
-            return this.helpers.renderPartial(filename, variables);
-          }
-        }
-      },
-      dev: {
-        files: [
-          {
-            "expand": true,
-            "cwd": "src/html/pages/",
-            "src": "**/*.ejs",
-            "dest": "build/",
-            "ext": ".html"
-          }
-        ]
-      }
-    },
+  // Load all the tasks options in tasks/options base on the name:
+  // watch.js => watch{}
+  grunt.util._.extend(config, loadConfig('./tasks/'));
 
-    express: {
-      dev: {
-        options: {
-          script: "./server.js"
-        }
-      }
-    },
+  grunt.initConfig(config);
 
-    copy: {
-      "dev": {
-        "files": [
-          {
-            "expand": true,
-            "cwd": "./src/assets/",
-            "src": "**/*",
-            "dest": "./build/assets/"
-          }
-        ]
-      }
-    },
-
-    clean: {
-      options: {
-        force: true
-      },
-      build: ['./build/']
-    }
-
-  });
-
-  //Load the plugins
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-postcss');
-  grunt.loadNpmTasks('grunt-ejs-render');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-express-server');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  require('load-grunt-tasks')(grunt);
 
   //Define the tasks to run
-  grunt.registerTask('default', ['clean', 'sass:dist', 'postcss', 'render', 'copy', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'postcss', 'render', 'copy', 'concat', 'uglify']);
 
   grunt.registerTask('dev', '[EP] Active development phase', [
     'sass:dev',

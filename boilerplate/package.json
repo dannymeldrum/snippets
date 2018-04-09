@@ -9,8 +9,7 @@
   },
   "private": true,
   "license": "MIT",
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
     "autoprefixer": "^8.2.0",
     "connect-livereload": "^0.6.0",
     "csswring": "^6.0.3",
@@ -27,5 +26,8 @@
     "grunt-sass": "^2.1.0",
     "open": "^0.0.5",
     "postcss": "^6.0.21"
+  },
+  "dependencies": {
+    "load-grunt-tasks": "^3.5.2"
   }
 }
