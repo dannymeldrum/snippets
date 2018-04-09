@@ -85,7 +85,7 @@ async-foreach@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/async-foreach/-/async-foreach-0.1.3.tgz#36121f845c0578172de419a97dbeb1d16ec34542"
 
-async@^1.5.0:
+async@^1.5.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -117,8 +117,8 @@ aws-sign2@~0.7.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
 
 aws4@^1.2.1, aws4@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -256,8 +256,8 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
 caniuse-lite@^1.0.30000817, caniuse-lite@^1.0.30000821:
-  version "1.0.30000823"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000823.tgz#b79842a5b5a48eaa416b73f5a5d7a23f52d26014"
+  version "1.0.30000824"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000824.tgz#de3bc1ba0bff4937302f8cb2a8632a8cc1c07f9a"
 
 caseless@~0.11.0:
   version "0.11.0"
@@ -573,8 +573,8 @@ ejs@~1.0.0:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-1.0.0.tgz#c9c60a48a46ee452fb32a71c317b95e5aa1fcb3d"
 
 electron-to-chromium@^1.3.41:
-  version "1.3.41"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.41.tgz#7e33643e00cd85edfd17e04194f6d00e73737235"
+  version "1.3.42"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.42.tgz#95c33bf01d0cc405556aec899fe61fd4d76ea0f9"
 
 error-ex@^1.2.0:
   version "1.3.1"
@@ -856,6 +856,13 @@ graceful-fs@^4.1.2:
 graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
+
+grunt-contrib-clean@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/grunt-contrib-clean/-/grunt-contrib-clean-1.1.0.tgz#564abf2d0378a983a15b9e3f30ee75b738c40638"
+  dependencies:
+    async "^1.5.2"
+    rimraf "^2.5.1"
 
 grunt-contrib-concat@^1.0.1:
   version "1.0.1"
@@ -1716,19 +1723,7 @@ read-pkg@^1.0.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
-readable-stream@^2.0.1, readable-stream@^2.0.6:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.5.tgz#b4f85003a938cbb6ecbce2a124fb1012bd1a838d"
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.3"
-    isarray "~1.0.0"
-    process-nextick-args "~2.0.0"
-    safe-buffer "~5.1.1"
-    string_decoder "~1.0.3"
-    util-deprecate "~1.0.1"
-
-readable-stream@^2.2.2:
+readable-stream@^2.0.1, readable-stream@^2.0.6, readable-stream@^2.2.2:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
   dependencies:
@@ -1829,7 +1824,7 @@ response-time@~2.3.1:
     depd "~1.1.0"
     on-headers "~1.0.1"
 
-rimraf@2:
+rimraf@2, rimraf@^2.5.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -2044,12 +2039,6 @@ string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
-string_decoder@~1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
-  dependencies:
-    safe-buffer "~5.1.0"
-
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -2153,8 +2142,8 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 uglify-js@~3.3.0:
-  version "3.3.18"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.18.tgz#e16df66d71638df3c9bc61cce827e46f24bdac02"
+  version "3.3.20"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.20.tgz#dc8bdee7d454c7d31dddc36f922d170bfcee3a0a"
   dependencies:
     commander "~2.15.0"
     source-map "~0.6.1"

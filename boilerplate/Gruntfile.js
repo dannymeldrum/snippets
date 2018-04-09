@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
-          './src/js/libs/*.js',
+          './src/js/vendor/*.js',
           './src/js/script.js'
         ],
         dest: './build/assets/js/script.js'
@@ -147,6 +147,13 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+
+    clean: {
+      options: {
+        force: true
+      },
+      build: ['./build/']
     }
 
   });
@@ -157,12 +164,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ejs-render');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   //Define the tasks to run
-  grunt.registerTask('default', ['sass:dist', 'postcss', 'render', 'copy', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'sass:dist', 'postcss', 'render', 'copy', 'concat', 'uglify']);
 
   grunt.registerTask('dev', '[EP] Active development phase', [
     'sass:dev',
