@@ -15,7 +15,7 @@ module.exports = {
   },
   js: {
     files: ['./src/js/**/*'],
-    tasks: ['uglify'],
+    tasks: ['concat'],
     options: {
       livereload: true
     }

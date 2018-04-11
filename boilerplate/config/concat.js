@@ -1,5 +1,5 @@
 module.exports = {
-  dist: {
+  task: {
     src: [
       './src/js/vendor/*.js',
       './src/js/script.js'

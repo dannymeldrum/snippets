@@ -2,7 +2,6 @@
   "name": "Boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "Gruntfile.js",
   "keywords": [],
   "author": {
     "name": "Danny Meldrum"
@@ -28,6 +27,7 @@
     "postcss": "^6.0.21"
   },
   "dependencies": {
-    "load-grunt-tasks": "^3.5.2"
+    "load-grunt-configs": "^1.0.0",
+    "matchdep": "^2.0.0"
   }
 }

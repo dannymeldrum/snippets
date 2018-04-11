@@ -3,7 +3,7 @@ const csswring = require('csswring');
 
 module.exports = function (grunt, options) {
   return {
-    dev: {
+    task: {
       options: {
         processors: [
           autoprefixer({

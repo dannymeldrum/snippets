@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function (grunt, options) {
   return {
     dev: {
       options: {
@@ -25,5 +25,5 @@ module.exports = function (grunt) {
         ext: '.css'
       }]
     }
-  }
+  };
 }
