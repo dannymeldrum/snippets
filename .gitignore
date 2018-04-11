@@ -11,3 +11,4 @@ boilerplate/node_modules/
 boilerplate/build/
 boilerplate/package-lock.json
 boilerplate/yarn.lock
+boilerplate/yarn-error.log
