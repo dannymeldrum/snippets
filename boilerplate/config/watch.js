@@ -15,7 +15,7 @@ module.exports = {
   },
   js: {
     files: ['./src/js/**/*'],
-    tasks: ['concat'],
+    tasks: ['requirejs'],
     options: {
       livereload: true
     }

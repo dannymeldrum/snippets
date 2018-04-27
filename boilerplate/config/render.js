@@ -1,6 +1,5 @@
 module.exports = function(grunt){
   return {
-    task: {
       options: {
         partialPaths: ["src/html/partials/"],
         helpers: {
@@ -17,15 +16,27 @@ module.exports = function(grunt){
           }
         }
       },
-      files: [
-        {
-          expand: true,
-          cwd: "src/html/pages/",
-          src: "**/*.ejs",
-          dest: "build/",
-          ext: ".html"
-        }
-      ]
-    }
+      "dev": {
+        files: [
+          {
+            expand: true,
+            cwd: "src/html/pages/",
+            src: "**/*.ejs",
+            dest: "build/",
+            ext: ".html"
+          }
+        ]
+      },
+      "dist": {
+        files: [
+          {
+            expand: true,
+            cwd: "src/html/pages/",
+            src: "**/*.ejs",
+            dest: "build/",
+            ext: ".html"
+          }
+        ]
+      }
   }
 }
