@@ -13,18 +13,17 @@ const define_tasks = grunt => {
     'clean',
     'sass:dist',
     'postcss',
-    'render',
-    'copy',
-    'concat',
-    'uglify'
+    'render:dist',
+    'copy:dist',
+    'requirejs'
   ]);
 
   grunt.registerTask('dev', [
     'sass:dev',
     'postcss',
-    'render',
-    'copy',
-    'concat',
+    'render:dev',
+    'copy:dev',
+    'requirejs',
     'express',
     'watch'
   ]);
