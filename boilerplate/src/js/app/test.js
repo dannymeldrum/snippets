@@ -7,7 +7,7 @@ define(['jquery'], function($) {
     },
 
     on_load: function() {
-      console.log('loaded');
+      console.log('app/test.js');
     }
   }
 

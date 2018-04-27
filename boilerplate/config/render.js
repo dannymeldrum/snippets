@@ -16,7 +16,7 @@ module.exports = function(grunt){
           }
         }
       },
-      "dev": {
+      dev: {
         files: [
           {
             expand: true,
@@ -27,7 +27,7 @@ module.exports = function(grunt){
           }
         ]
       },
-      "dist": {
+      dist: {
         files: [
           {
             expand: true,

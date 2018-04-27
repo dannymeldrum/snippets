@@ -1,18 +1,10 @@
 require.config({
     baseUrl: './assets/js',
-
     paths: {
-        // App (kicks things off)
         app: 'app',
-
-        // Libraries (third party stuff)
-        jquery: 'vendor/jquery',
-    },
-
-    shim: {
+        // Libraries
+        jquery: '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min'
     }
-
 });
-
 
 require(['app']);

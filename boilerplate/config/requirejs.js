@@ -3,8 +3,7 @@ module.exports = {
     options: {
       name: 'main',
       baseUrl: "./src/js/",
-      //paths: { 'jquery': 'empty:' },
-      include: ['vendor/require', 'main'],
+      include: ['main'],
       mainConfigFile: "./src/js/main.js",
       out: "./build/assets/js/scripts.js"
     }
