@@ -1,8 +1,10 @@
-﻿// @import "normalize";
-
-// Core
+﻿// Core
 @import "core/vars";
-@import "mixins/_mixin";
+@import "functions/_em";
+@import "mixins/_aspect-ratio";
+@import "mixins/_flex";
+@import "mixins/_hide";
+@import "mixins/_media-query";
 
 // Common
 @import "core/base";

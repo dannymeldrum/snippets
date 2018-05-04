@@ -1,0 +1,22 @@
+// @include bp('large') {}
+
+$small:               '540px';
+$tablet:              '768px';
+$medium:              '1024px';
+$large:               '1280px';
+$huge:                '1920px';
+$breakpoints: (
+  'small':            '(min-width:#{$small})',
+  'max-small':        '(max-width:#{$small} - 1)',
+  'tablet':           '(min-width:#{$tablet})',
+  'max-tablet':       '(max-width:#{$tablet} - 1)',
+  'medium':           '(min-width:#{$medium})',
+  'max-medium':       '(max-width:#{$medium} - 1)',
+  'large':            '(min-width:#{$large})',
+  'max-large':        '(max-width:#{$large} - 1)',
+  'huge':             '(min-width:#{$huge})'
+);
+
+@mixin bp($point) {
+  @media only screen and #{ map-get($breakpoints, $point) } { @content; }
+}

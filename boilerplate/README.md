@@ -1,7 +1,24 @@
-yarn install
+# Boilerplate
 
-yarn add {{package}} --save-dev
+## Get started
+```bash
+$ yarn install
+```
 
-grunt dev
+## development
+```bash
+$ grunt dev
+```
 
-grunt
+
+## Production
+```bash
+$ grunt
+```
+
+
+## Install package
+```bash
+$ yarn add {{package}} --save-dev
+```
+
