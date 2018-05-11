@@ -1,24 +1,30 @@
 # Boilerplate
 
-## Get started
+## Yarn
+
+
+### Get started
 ```bash
 $ yarn install
 ```
 
-## development
+
+### Install package
+```bash
+$ yarn add {{package}} --save-dev
+```
+
+
+## Grunt
+
+
+### Development
 ```bash
 $ grunt dev
 ```
 
 
-## Production
+### Production
 ```bash
 $ grunt
 ```
-
-
-## Install package
-```bash
-$ yarn add {{package}} --save-dev
-```
-
